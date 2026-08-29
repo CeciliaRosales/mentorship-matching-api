@@ -1,5 +1,8 @@
-from matcher import overlap
+from matcher import overlap, score
+from models import Mentee, Mentor
 
+
+#test cases for overlap function
 def test_some_common():
     assert overlap({"python", "java", "javascript", "html"}, {"python", "html"}) == 0.5
 
@@ -14,3 +17,11 @@ def test_no_common():
 
 def test_capitalization():
     assert overlap({"Hiking"}, {"hiking"}) == 1.0
+
+#test cases for score function
+mindy = Mentee("1", "Mindy", "EECS", ["python", "java"], ["3d printing", "robotics"], ["hiking", "reading"])
+maddy = Mentor("2", "Maddy", "EECS", ["python", "html"], ["robotics"], ["hiking", "painting"])
+
+#same major = 35 points, 1 subject in commmon = 12.5 points, 1 skill in common = 12.5 points, 1 interest in common = 7.5 points, total = 35 + 12.5 + 12.5 + 7.5 = 67.5
+def test_score():
+    assert score(mindy, maddy) == 67.5
