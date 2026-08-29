@@ -24,3 +24,6 @@ def score(mentee, mentor):
     total_score += WEIGHTS["interests"] * overlap(mentee.interests, mentor.interests)
 
     return total_score
+
+def match_all(mentees, mentors):
+    remaining_cap = {}
