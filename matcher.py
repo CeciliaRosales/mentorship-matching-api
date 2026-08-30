@@ -27,3 +27,23 @@ def score(mentee, mentor):
 
 def match_all(mentees, mentors):
     remaining_cap = {}
+    for mentor in mentors:
+        remaining_cap[mentor.id] = mentor.capacity
+    results = []
+    for mentee in mentees:
+        best_match = None
+        best_score = -1
+        for mentor in mentors:
+            if remaining_cap[mentor.id] > 0:
+                current_score = score(mentee, mentor)
+                if current_score > best_score:
+                    best_score = current_score
+                    best_match = mentor
+        if best_match is not None: #if we found a best mentor
+            remaining_cap[best_match.id] -= 1
+            results.append({"mentee": mentee.name, "mentor": best_match.name, "score": best_score})
+        else:
+            results.append({"mentee": mentee.name, "mentor": None, "score": 0})
+
+    return results #write down the pairing
+
