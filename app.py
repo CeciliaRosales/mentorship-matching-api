@@ -33,6 +33,11 @@ def add_mentor():
 def get_matches():
     return jsonify(match_all(mentees, mentors))
 
+@app.route("/")
+def index():
+    return jsonify({
+        "endpoints": ["GET /mentees", "POST /mentees", "GET /mentors", "POST /mentors", "GET /matches"]
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
